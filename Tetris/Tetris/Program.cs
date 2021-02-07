@@ -10,7 +10,11 @@ namespace Tetris
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
 
-            Square s = new Square(2, 5, '*');
+            Stick s = new Stick(4, 5, '*');
+            s.Draw();
+            Thread.Sleep(500);
+            s.Hide();
+            s.Rotate();
             s.Draw();
             Thread.Sleep(500);
             s.Hide();
