@@ -4,25 +4,25 @@ namespace Tetris
 {
     internal class FigureGenerator
     {
-        private int _x;
-        private int _y;
-        private char _c;
+        private int X { get; set; }
+        private int Y { get; set; }
+        private char C { get; set; }
 
         private Random _rand = new Random();
 
         public FigureGenerator(int x, int y, char c)
         {
-            _x = x;
-            _y = y;
-            _c = c;
+            X = x;
+            Y = y;
+            C = c;
         }
 
         public Figure GetNewFigure()
         {
             if(_rand.Next(0, 2) == 0)
-                return new Square(_x, _y, _c);
+                return new Square(X, Y, C);
             else
-                return new Stick(_x, _y, _c);
+                return new Stick(X, Y, C);
         }
     }
 }
