@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Tetris
 {
@@ -6,7 +7,42 @@ namespace Tetris
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.SetWindowSize(Field.Widht, Field.Height);
+            Console.SetBufferSize(Field.Widht, Field.Height);
+
+            Field.Widht = 20;
+            Field.Height = 20;
+
+            FigureGenerator generator = new FigureGenerator(20, 0, '*');
+            Figure currentFigure = generator.GetNewFigure();
+
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    HandleKey(currentFigure, key);
+                }
+            }
+        }
+
+        private static void HandleKey(Figure currentFigure, ConsoleKeyInfo key)
+        {
+            switch (key.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    currentFigure.TryMove(Direction.LEFT);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentFigure.TryMove(Direction.RIGHT);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentFigure.TryMove(Direction.DOWN);
+                    break;
+                case ConsoleKey.Spacebar:
+                    currentFigure.TryRotate();
+                    break;
+            }
         }
     }
 }
